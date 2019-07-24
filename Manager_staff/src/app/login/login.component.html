@@ -1,0 +1,13 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <h1>Đăng nhập</h1>
+    <input type="text" name="userName" formControlName="userName" [ngClass]="{ 'is-invalid': submitted && f.userName.errors }">
+    <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+        <div *ngIf="f.userName.errors.required">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Username is required</div>
+    </div>
+    <input type="text" name="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+        <div *ngIf="f.password.errors.required">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Password is required</div>
+    </div>
+    <br/>
+    <button>Submit</button>
+</form>

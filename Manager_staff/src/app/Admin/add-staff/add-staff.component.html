@@ -1,0 +1,55 @@
+<div>
+    <div style="text-align: center;font-size: 30px"><br/><b>Thêm nhân viên</b></div>
+    <br/>
+    <form [formGroup]="AddForm" (ngSubmit)="onSubmit()">
+        <label>Họ tên</label>
+        <input type="text" formControlName="full_name" name="full_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.full_name.errors }">
+        <div *ngIf="submitted && f.full_name.errors" class="invalid-feedback">
+            <div *ngIf="f.full_name.errors.required">Username is required</div>
+        </div>
+        <label>Giới tính</label>&nbsp;&nbsp;&nbsp;
+        <span>
+           &nbsp;&nbsp; &nbsp;&nbsp;<input type="radio"   value= "Male"  formControlName="gender" name="gender" checked>Male <br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="radio" checked  value="Female" formControlName="gender" name="gender">Female<br/>
+        </span>
+        <label>Địa chỉ</label>
+        <input type="text" formControlName="address" name="address" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address.errors }">
+        <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+            <div *ngIf="f.address.errors.required">Address is required</div>
+        </div>
+        <label>Email</label>
+        <input type="text" class="form-control" formControlName="email" name="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">Email is required</div>
+            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+        </div>
+        <label>Ngày sinh</label>
+        <input type="date" formControlName="birthday" name="birthday" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.birthday.errors }">
+        <div *ngIf="submitted && f.birthday.errors" class="invalid-feedback">
+            <div *ngIf="f.birthday.errors.required">Birthday is required</div>
+        </div>
+        <label>Chức vụ</label>
+        <input type="text" formControlName="grade" name="grade" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.grade.errors }">
+        <div *ngIf="submitted && f.grade.errors" class="invalid-feedback">
+            <div *ngIf="f.grade.errors.required">Grade is required</div>
+        </div>
+
+        <label>Bộ phận</label>
+        <select formControlName="id_department">
+            <option *ngFor="let dept of depts"  [value]="dept.id_department">{{dept.department_name}}</option>
+        </select>
+        <div *ngIf="submitted && f.id_department.errors" class="invalid-feedback">
+            <div *ngIf="f.id_department.errors.required">Department is required</div>
+        </div>
+        <label>Mật khẩu</label>
+        <input type="text" formControlName="password" name="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+        </div>
+        <input type="submit" value="Submit">
+    </form>
+    <br/>
+    <br/>
+</div>

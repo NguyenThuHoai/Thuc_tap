@@ -1,0 +1,80 @@
+.admin {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: auto;
+    box-sizing: border-box
+}
+
+.tarkbar {
+    width: 21%;
+    height: 800px;
+    float: left;
+    background-color: darkgrey;
+    line-height: 40px;
+    padding: 13px 16px
+}
+
+.content {
+    width: 75%;
+    float: left;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: 825px;
+    margin-left: 20px
+}
+
+.tarkbar h2 {
+    display: block;
+    text-align: center;
+    line-height: 70px
+}
+
+.tarkbar p {
+    text-align: center;
+}
+
+.tarkbar ul li {
+    display: block;
+    list-style-type: none;
+}
+
+.tarkbar a {
+    text-decoration: none;
+    color: black;
+}
+
+.content h3 {
+    display: block;
+    background-color: darkgrey;
+    padding: 14px 30px;
+    margin-top: 0px;
+    line-height: 35px
+}
+
+.button {
+    margin-left: 30px;
+    margin-top: 10px;
+    display: inline-block;
+    padding: 13px 15px;
+    background-color: darkcyan
+}
+
+.nhanvien {
+    width: 95%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    overflow-y: auto;
+    margin: 20px 30px;
+}
+
+.nhanvien tr {
+    border-bottom: 1px solid black;
+    line-height: 40px
+}
+
+.nhanvien td,
+th {
+    text-align: left;
+    font-size: 15px
+}
