@@ -11,6 +11,7 @@ var server = app.listen(3000, function() {
 });
 module.exports = app;
 var connect = require('./connect');
-var routes = require('./router');
 
-app.use('/', routes);   
+app.use('/',require('./Router/staff'));   
+app.use('/', require('./Router/department')); 
+app.use('/', require('./Router/admin'));   

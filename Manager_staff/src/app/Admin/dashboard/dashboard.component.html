@@ -1,21 +1,20 @@
 <div class="admin">
     <div class="tarkbar">
         <h2>Quản lý nhân sự</h2>
-        <p>Xin chào: <strong>Nguyễn Thư Hoài</strong>
+        <p>Xin chào: <strong>{{currentUser}}</strong>
             <span>|<button (click)="logout()">Thoát</button> </span>
         </p>
         <ul>
-            <li><a style="cursor: pointer" (click)="list_staff()">Nhân viên</a></li>
+            <li><a style="cursor: pointer" (click)="list_staff()">Tài khoản</a></li>
             <li><a style="cursor: pointer" (click)="list_department()">Bộ phận</a></li>
             <li></li>
             <li></li>
-
         </ul>
     </div>
     <div class="content">
         <div *ngIf="chooseStaff">
-            <h3>Danh sách nhân viên</h3>
-            <div class="button"><a style="color: white;text-decoration: none" [routerLink]="['/addStaff']">Thêm nhân viên</a></div>
+            <h3>Danh sách tài khoản</h3>
+            <div class="button"><a style="color: white;text-decoration: none" [routerLink]="['/addStaff']">Thêm tài khoản</a></div>
             <table class="nhanvien">
                 <tr>
                     <th>STT</th>
@@ -29,18 +28,18 @@
                     <th>Mật khẩu</th>
                     <th colspan="2">Xử lí</th>
                 </tr>
-                <tr *ngFor="let user of staffs">
-                    <td>{{user.id}}</td>
-                    <td>{{user.full_name}}</td>
-                    <td>{{user.gender}}</td>
-                    <td>{{user.address}}</td>
-                    <td>{{user.email}}</td>
-                    <td>{{user.birthday|date:'dd/MM/yyyy'}}</td>
-                    <td>{{user.grade}}</td>
-                    <td>{{user.department_name}}</td>
-                    <td>{{user.password}}</td>
-                    <td><button (click)="editAcc(user,id)">Sửa</button></td>
-                    <td><button (click)="delAcc(user,id)">Xóa</button></td>
+                <tr *ngFor="let staff of staffs">
+                    <td>{{staff.id}}</td>
+                    <td>{{staff.full_name}}</td>
+                    <td>{{staff.gender}}</td>
+                    <td>{{staff.address}}</td>
+                    <td>{{staff.email}}</td>
+                    <td>{{staff.birthday|date:'dd/MM/yyyy'}}</td>
+                    <td>{{staff.grade}}</td>
+                    <td>{{staff.department_name}}</td>
+                    <td>{{staff.password}}</td>
+                    <td><button (edit)="editStaff(staff)">Sửa</button></td>
+                    <td><button (click)="delStaff(staff.id)">Xóa</button></td>
                 </tr>
             </table>
         </div>
@@ -52,14 +51,14 @@
                     <th>STT</th>
                     <th>Tên bộ phận</th>
                     <th>Địa chỉ</th>
-                    <th>Quản lý</th>
+                    <th>Trưởng phòng</th>
                     <th colspan="2">Xử lí</th>
                 </tr>
                 <tr *ngFor="let dept of depts">
                     <td>{{dept.id_department}}</td>
                     <td>{{dept.department_name}}</td>
-                    <td>{{dept.manager}}</td>
                     <td>{{dept.address}}</td>
+                    <td>{{dept.manager}}</td>
                     <td><button (click)="editDept()">Sửa</button></td>
                     <td><button (click)="delDept(dept.id_department)">Xóa</button></td>
                 </tr>

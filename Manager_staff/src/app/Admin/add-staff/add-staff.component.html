@@ -1,3 +1,4 @@
+<button style="cursor: pointer;padding: 13px 15px;background-color: black;color: white" (click)=goBack()>Dashboard</button>
 <div>
     <div style="text-align: center;font-size: 30px"><br/><b>Thêm nhân viên</b></div>
     <br/>
@@ -30,7 +31,10 @@
             <div *ngIf="f.birthday.errors.required">Birthday is required</div>
         </div>
         <label>Chức vụ</label>
-        <input type="text" formControlName="grade" name="grade" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.grade.errors }">
+        <select formControlName="grade">
+            <option>Trưởng phòng</option>
+            <option>Nhân viên</option>
+        </select>
         <div *ngIf="submitted && f.grade.errors" class="invalid-feedback">
             <div *ngIf="f.grade.errors.required">Grade is required</div>
         </div>

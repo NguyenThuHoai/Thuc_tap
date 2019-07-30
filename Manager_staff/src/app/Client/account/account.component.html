@@ -1,0 +1,17 @@
+<p style="font-size: 30px">Đổi mật khẩu</p>
+<table id="customers">
+    <tr>
+        <td>Email đăng nhập</td>
+        <td>{{user.email}}</td>
+    </tr>
+    <tr>
+        <td>Mật khẩu cũ</td>
+        <td><input type="password" placeholder="********" [(ngModel)]="old_pass"></td>
+    </tr>
+    <tr>
+        <td>Mật khẩu mới</td>
+        <td><input type="password" placeholder="********" [(ngModel)]="new_pass"></td>
+    </tr>
+</table>
+<br/>
+<input style="padding: 10px 16px;font-size: 15px;background-color: #1abc9c" (click)="onSubmit()" type="submit" value="Save">

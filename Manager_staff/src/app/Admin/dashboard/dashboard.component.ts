@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
 
-import { AdminService} from '../Admin.service';
 import {staff} from '../../Model/staff';
 import { dept } from '../../Model/dept';
+import { admin} from '../../Model/Admin';
+import {AdminService } from '../../Admin/Admin.service';
 
 @Component({
   selector: 'app-root-account',
@@ -17,11 +18,14 @@ export class DashboardComponent implements OnInit {
   chooseDepartment:boolean;
   staffs:staff[];
   depts:dept[];
+  admin: admin[];
 
   constructor(
     private router:Router,
-    private service:AdminService
-  ) { }
+    private service:AdminService,
+  ) {
+      //this.admin = JSON.parse(localStorage.getItem('admin'));
+   }
 
   ngOnInit() {
       this.getStaff();
@@ -29,7 +33,7 @@ export class DashboardComponent implements OnInit {
   }
 
   logout(){
-      this.router.navigate(['/logout']);
+      this.router.navigate(['/login']);
   }
 
   list_staff(){
@@ -42,23 +46,37 @@ export class DashboardComponent implements OnInit {
     this.chooseStaff=false;  
   }
   
-  getStaff(){
-     return this.service.listStaff().subscribe(data => this.staffs=data,
-      error=>console.log(error),
-      );
-  }
-
-  getDept(){
-    return this.service.listDept().subscribe(data => this.depts=data,
-          error=>console.log(error),
-          );
-  }
   delDept(id){
+    console.log(id);
     this.conFirm= confirm("Are you delete department?");
     if(this.conFirm){
-    return this.service.delDept(id).subscribe();
+      this.service.delDept(id).subscribe();
+    };
     location.reload();
-    }
   }
 
+  delStaff(id){
+    this.conFirm= confirm("Are you delete staff?");
+    if(this.conFirm){
+      this.service.delStaff(id).subscribe();
+    };
+    location.reload();
+  }
+
+  getStaff(){
+    return this.service.listStaff().subscribe(data => this.staffs=data,
+     error=>console.log(error),
+     );
+ }
+
+ getDept(){
+   return this.service.listDept().subscribe(data => this.depts=data,
+         error=>console.log(error),
+         );
+ }
+
+ editStaff(staffInfo){
+  this.router.navigate(['/addStaff']);
+  console.log(staffInfo);
+ }
 }

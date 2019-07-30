@@ -1,0 +1,20 @@
+<div class="menu">
+    <ul>
+        <li>
+            <a>Trang chủ</a>
+            <a (click)="showInfo()">Thông tin</a>
+            <a (click)="Account()">Tài khoản</a>
+            <a (click)="logout()">Đăng xuất</a>
+            <span style="margin-left: 700px">Xin chào: {{currentUser.email}}</span>
+        </li>
+    </ul>
+</div>
+
+<div class="content">
+    <div *ngIf="chooseInfo">
+        <app-staff-info [value]="currentUser.email"></app-staff-info>
+    </div>
+    <div *ngIf="chooseAccount">
+        <app-account [value]="currentUser.email"></app-account>
+    </div>
+</div>

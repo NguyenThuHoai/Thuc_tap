@@ -5,4 +5,5 @@ var connect = sql.createPool({
     password: '',
     database: 'manager_staff'
 });
+
 module.exports = connect;	

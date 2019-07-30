@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient,HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { staff} from '../Model/staff';
 import { dept } from '../Model/dept';
+
+const HttpOptions ={
+  headers:new HttpHeaders({'Content-Type':'application/json'})
+};
 
 @Injectable({
   providedIn: 'root'
@@ -31,10 +35,9 @@ export class AdminService {
       );
   }
 
-  addStaff(staff):Observable<any>{
-    return this.http.post<any>(this.staffURL,staff).pipe(
-      tap(),
-      catchError(error=>of([]))
+  addStaff(staff):Observable<staff[]>{
+    return this.http.post<staff[]>(this.staffURL,staff,HttpOptions).pipe(
+      catchError(error => of(new staff()))
     );
   }
 
@@ -44,12 +47,22 @@ export class AdminService {
       catchError(error => of([]))
     )
   }
-  delDept(id){
-    return this.http.delete(this.staffURL,id).pipe(
-      tap(),
-      catchError(error => of([]))
-    )
 
+  delDept(id):Observable<any>{
+    const url = `${this.deptURL}/${id}`; 
+  return this.http.delete(url, HttpOptions)
+    .pipe(
+      tap(),
+      catchError(error => of(null))
+    );
+  }
+
+  delStaff(id):Observable<any>{
+      const url = `${this.staffURL}/${id}`;
+      return this.http.delete(url,HttpOptions).pipe(
+        tap(),
+        catchError(error =>of(null))
+      );
   }
 
   getAdmin(){

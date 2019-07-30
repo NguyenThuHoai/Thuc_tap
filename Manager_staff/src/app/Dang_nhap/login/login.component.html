@@ -1,0 +1,33 @@
+<h3 style="padding-left: 45px">Đăng nhập dành cho</h3>
+<button (click)="adminLog()">Admin</button><br/><br/>
+<button (click)="staffLog()">Nhân viên</button>
+
+<form *ngIf="chooseAdLog" [formGroup]="loginFormAd" (ngSubmit)="onSubmitAd()">
+    <h1>Admin</h1>
+    <input type="text" name="userName" formControlName="userName" [ngClass]="{ 'is-invalid': submitted && f.userName.errors }">
+    <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+        <div *ngIf="f.userName.errors.required">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Username is required</div>
+    </div>
+    <input type="password" name="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+        <div *ngIf="f.password.errors.required">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Password is required</div>
+    </div>
+    <br/>
+    <button>Submit</button>
+</form>
+
+<form *ngIf="chooseStffLog" [formGroup]="loginFormSt" (ngSubmit)="onSubmitSt()">
+    <h1>Nhân viên</h1>
+    <input type="text" name="email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && func.email.errors }">
+    <div *ngIf="submitted && func.email.errors" class="invalid-feedback">
+        <div *ngIf="func.email.errors.required">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Email is required</div>
+        <div *ngIf="func.email.errors.email">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email must be a valid email address</div>
+
+    </div>
+    <input type="password" name="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && func.password.errors }">
+    <div *ngIf="submitted && func.password.errors" class="invalid-feedback">
+        <div *ngIf="func.password.errors.required">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Password is required</div>
+    </div>
+    <br/>
+    <button>Submit</button>
+</form>

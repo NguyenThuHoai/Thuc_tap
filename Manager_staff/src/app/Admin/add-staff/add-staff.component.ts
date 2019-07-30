@@ -34,13 +34,18 @@ export class AddStaffComponent implements OnInit {
       address:['',Validators.required],
       gender:['Male'],
       birthday:['',Validators.required],
-      grade:['',Validators.required],
+      grade:['Nhân viên',Validators.required],
       id_department:['',Validators.required],
     }
     );
   }
   get f(){
       return this.AddForm.controls;
+  }
+
+  goBack(){
+    this.router.navigate(['/admin']);  
+
   }
 
   getDept(){
@@ -54,11 +59,9 @@ export class AddStaffComponent implements OnInit {
     if(this.AddForm.invalid){
       return;
     }
-    //this.service.addStaff(this.AddForm.value).subscribe(data => this.staffs.push(data));
     this.service.addStaff(this.AddForm.value).subscribe(data => this.staffs.push(data));
       console.log(this.AddForm.value);
       this.submitted=false;
       this.AddForm.reset();
-      this.router.navigate(['/']);  
   }
 }

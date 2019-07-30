@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router} from '@angular/router';
+import { Router, ActivatedRoute} from '@angular/router';
 
 import {AdminService} from '../Admin.service';
 import { dept } from '../../Model/dept';
@@ -17,7 +17,8 @@ export class AddDepartmentComponent implements OnInit {
   constructor(
     private formBuilder:FormBuilder,
     private service:AdminService,
-    private router:Router
+    private router:Router,
+    private _router:ActivatedRoute
   ) {}
   ngOnInit() {
     this.AddForm=this.formBuilder.group({
@@ -38,11 +39,12 @@ export class AddDepartmentComponent implements OnInit {
     }
     this.service.addDept(this.AddForm.value).subscribe(data => this.dept.push(data));
       console.log(this.dept);
-      //console.log(this.AddForm.value);
       this.submitted=false;
       this.AddForm.reset();
-      this.router.navigate(['/']);  
-      //location.reload();
+  }
+  goBack(){
+    this.router.navigate(['/admin']);  
+
   }
 
 }
