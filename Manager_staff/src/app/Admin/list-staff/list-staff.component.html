@@ -1,0 +1,29 @@
+<div>
+    <h3>Danh sách nhân viên thuộc phòng</h3>
+    <button (click)="export()" style="color:white;background-color: teal;margin-left: 30px;margin-top: 10px;display: inline-block;padding: 13px 20px;">Export</button>
+    <table class="nhanvien">
+        <tr>
+            <th>STT</th>
+            <th>Họ tên</th>
+            <th>Giới tính</th>
+            <th>Địa chỉ</th>
+            <th>Email</th>
+            <th>Ngày sinh</th>
+            <th>Chức vụ</th>
+            <th colspan="2">Xử lí</th>
+        </tr>
+        <tr *ngFor="let staff of Staffs,index as id">
+            <td>{{id}}</td>
+            <td>{{staff.full_name}}</td>
+            <td *ngIf="staff.gender=='Male'">Nam</td>
+            <td *ngIf="staff.gender=='Female'">Nữ</td>
+            <td>{{staff.address}}</td>
+            <td>{{staff.email}}</td>
+            <td>{{staff.birthday|date:'dd/MM/y'}}</td>
+            <td *ngIf="staff.grade=='Manager'">Trưởng phòng</td>
+            <td *ngIf="staff.grade=='Staff'">Nhân viên</td>
+            <td><button (click)="editStaff()">Sửa</button></td>
+            <td><button (click)="delStaff(staff.id)">Xóa</button></td>
+        </tr>
+    </table>
+</div>

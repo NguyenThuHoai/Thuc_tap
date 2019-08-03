@@ -1,0 +1,17 @@
+<div style="text-align: center;font-size: 30px"><br/><b>Sửa thông tin bộ phận</b></div>
+<br/>
+<form [formGroup]="EditForm" (ngSubmit)="onSubmit()">
+    <label>Tên bộ phận</label>
+    <input type="text" formControlName="department_name" name="department_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.department_name.errors }">
+    <div *ngIf="submitted && f.department_name.errors" class="invalid-feedback">
+        <div *ngIf="f.department_name.errors.required">Name is required</div>
+    </div>
+    <label>Địa chỉ</label>
+    <input type="text" formControlName="address" name="address" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address.errors }">
+    <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+        <div *ngIf="f.address.errors.required">Address is required</div>
+    </div>
+    <input type="submit" value="Submit">
+</form>
+<br/>
+<br/>

@@ -24,7 +24,6 @@ export class AddDepartmentComponent implements OnInit {
     this.AddForm=this.formBuilder.group({
       department_name:['',Validators.required],
       address:['',Validators.required],
-      manager:['',Validators.required]
     }
     );
     

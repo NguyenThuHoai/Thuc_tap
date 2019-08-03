@@ -1,0 +1,15 @@
+<h3>Đổi mật khẩu</h3>
+<br/><br/><br/><br/> >
+<form class="form" [formGroup]="ResetForm" (ngSubmit)="onSubmit()">
+    <label>Username</label>
+    <input type="text" formControlName="username">
+    <div *ngIf="submitted && f.username.errors" class="invalid-feedback" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
+        <div *ngIf="f.username.errors.required">Username is required</div>
+    </div>
+    <label>Password</label>
+    <input type="password" formControlName="password">
+    <div *ngIf="submitted && f.password.errors" class="invalid-feedback" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+        <div *ngIf="f.password.errors.required">Password is required</div>
+    </div>
+    <input type="submit" value="submit">
+</form>

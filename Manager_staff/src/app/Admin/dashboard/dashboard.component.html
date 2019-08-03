@@ -1,12 +1,13 @@
 <div class="admin">
     <div class="tarkbar">
         <h2>Quản lý nhân sự</h2>
-        <p>Xin chào: <strong>{{currentUser}}</strong>
-            <span>|<button (click)="logout()">Thoát</button> </span>
+        <p>Xin chào: <strong>{{admin.username}}</strong>
+            <span>|<button (click)="logout()" class="logout">Thoát</button> </span>
         </p>
         <ul>
             <li><a style="cursor: pointer" (click)="list_staff()">Tài khoản</a></li>
             <li><a style="cursor: pointer" (click)="list_department()">Bộ phận</a></li>
+            <li><a style="cursor: pointer" (click)="list_acc()">Tài khoản</a></li>
             <li></li>
             <li></li>
         </ul>
@@ -25,43 +26,69 @@
                     <th>Ngày sinh</th>
                     <th>Chức vụ</th>
                     <th>Bộ phận</th>
-                    <th>Mật khẩu</th>
                     <th colspan="2">Xử lí</th>
                 </tr>
-                <tr *ngFor="let staff of staffs">
-                    <td>{{staff.id}}</td>
+                <tr *ngFor="let staff of staffs,index as id">
+                    <td>{{id}}</td>
                     <td>{{staff.full_name}}</td>
-                    <td>{{staff.gender}}</td>
+                    <td *ngIf="staff.gender=='Male'">Nam</td>
+                    <td *ngIf="staff.gender=='Female'">Nữ</td>
                     <td>{{staff.address}}</td>
                     <td>{{staff.email}}</td>
                     <td>{{staff.birthday|date:'dd/MM/yyyy'}}</td>
-                    <td>{{staff.grade}}</td>
+                    <td *ngIf="staff.grade=='Manager'">Trưởng phòng</td>
+                    <td *ngIf="staff.grade=='Staff'">Nhân viên</td>
                     <td>{{staff.department_name}}</td>
-                    <td>{{staff.password}}</td>
-                    <td><button (edit)="editStaff(staff)">Sửa</button></td>
+                    <td><button (click)="editStaff(staff.id)">Sửa</button></td>
                     <td><button (click)="delStaff(staff.id)">Xóa</button></td>
                 </tr>
             </table>
+            <app-edit-staff *ngIf="chooseEdit" [idstaff]="id_staff"></app-edit-staff>
         </div>
+
         <div *ngIf="chooseDepartment">
             <h3>Danh sách bộ phận</h3>
             <div class="button"><a style="color: white;text-decoration: none" [routerLink]="['/addDept']">Thêm bộ phận</a></div>
-            <table class="nhanvien">
+            <br/>
+            <br/>
+            <table class="nhanvien" style="width:70%;margin:auto">
                 <tr>
                     <th>STT</th>
                     <th>Tên bộ phận</th>
                     <th>Địa chỉ</th>
-                    <th>Trưởng phòng</th>
                     <th colspan="2">Xử lí</th>
                 </tr>
-                <tr *ngFor="let dept of depts">
-                    <td>{{dept.id_department}}</td>
-                    <td>{{dept.department_name}}</td>
+                <tr *ngFor="let dept of depts; index as id">
+                    <td>{{id}}</td>
+                    <td><a class="showDept" (click)="showDept(dept.id_department)">{{dept.department_name}}</a></td>
                     <td>{{dept.address}}</td>
-                    <td>{{dept.manager}}</td>
-                    <td><button (click)="editDept()">Sửa</button></td>
+                    <td><button (click)="editDept(dept.id_department)">Sửa</button></td>
                     <td><button (click)="delDept(dept.id_department)">Xóa</button></td>
                 </tr>
             </table>
+            <app-edit-dept *ngIf="chooseEdit" [id]="id_dept"></app-edit-dept>
         </div>
-    </div>
+
+        <div *ngIf="listStaff">
+            <app-list-staff [value]="id_department"></app-list-staff>
+        </div>
+        <div *ngIf="chooseAcc">
+            <h3>Danh sách tài khoản nhân viên</h3>
+            <form>
+                <table class="nhanvien" style="width:70%;margin:auto">
+                    <tr>
+                        <td>STT</td>
+                        <td>Tài khoản</td>
+                        <td>chọn</td>
+                    </tr>
+                    <tr *ngFor="let acc of staffs; index as id">
+                        <td>{{id}}</td>
+                        <td>{{acc.email}}</td>
+                        <td>
+                            <input type="checkbox" [(ngModel)]="acc.select" (change)="choose(acc.email,acc.select)" [ngModelOptions]="{standalone: true}" value="false">
+                        </td>
+                    </tr>
+                </table>
+                <input style=" margin-left: 200px;font-size:15px;margin-top: 30px;padding: 10px 15px;background-color: darkcyan;color: white" type="submit" value="Reset" (click)="resetPass()">
+            </form>
+        </div>

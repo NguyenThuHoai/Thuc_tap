@@ -1,0 +1,26 @@
+h3 {
+    display: block;
+    background-color: darkgrey;
+    padding: 14px 30px;
+    margin-top: 0px;
+    line-height: 35px
+}
+
+.nhanvien {
+    width: 95%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    overflow-y: auto;
+    margin: 20px 30px;
+}
+
+.nhanvien tr {
+    border-bottom: 1px solid black;
+    line-height: 40px
+}
+
+.nhanvien td,
+th {
+    text-align: left;
+    font-size: 15px
+}

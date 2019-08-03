@@ -11,7 +11,10 @@ var server = app.listen(3000, function() {
 });
 module.exports = app;
 var connect = require('./connect');
+var contact = require('./Router/contact'); 
+//contact('nguyenthuhoai1771998@gmail.com','xin chào');
 
 app.use('/',require('./Router/staff'));   
 app.use('/', require('./Router/department')); 
 app.use('/', require('./Router/admin'));   
+app.use('',contact);

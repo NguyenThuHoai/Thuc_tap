@@ -25,3 +25,52 @@
     background-color: #1abc9c;
     color: white;
 }
+
+.button {
+    padding: 10px 13px;
+    background-color: #1abc9c;
+    color: white;
+    font-size: 15px
+}
+
+input {
+    border-collapse: collapse;
+    outline: 0;
+}
+
+.editForm form {
+    width: 40%;
+    margin: auto
+}
+
+.editForm input[type=text],
+input[type=date],
+select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.editForm div {
+    border-radius: 5px;
+}
+
+.editForm input[type=submit] {
+    padding: 10px 14px;
+    margin-top: 10px;
+    border-radius: 5px;
+    background-color: darkturquoise;
+    font-size: 15px
+}
+
+.editForm label {
+    font-size: 20px
+}
+
+.editForm .invalid-feedback {
+    color: red
+}

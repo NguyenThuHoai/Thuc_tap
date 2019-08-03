@@ -32,8 +32,8 @@
         </div>
         <label>Chức vụ</label>
         <select formControlName="grade">
-            <option>Trưởng phòng</option>
-            <option>Nhân viên</option>
+            <option value="Manager">Trưởng phòng</option>
+            <option value = "Staff">Nhân viên</option>
         </select>
         <div *ngIf="submitted && f.grade.errors" class="invalid-feedback">
             <div *ngIf="f.grade.errors.required">Grade is required</div>
@@ -47,7 +47,7 @@
             <div *ngIf="f.id_department.errors.required">Department is required</div>
         </div>
         <label>Mật khẩu</label>
-        <input type="text" formControlName="password" name="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+        <input type="password" formControlName="password" name="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
 
         <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
             <div *ngIf="f.password.errors.required">Password is required</div>

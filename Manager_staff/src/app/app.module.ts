@@ -16,6 +16,10 @@ import {AuthGuard} from './Dang_nhap/guards/auth.guard';
 import { StaffInfoComponent } from './client/staff-info/staff-info.component';
 import { AccountComponent } from './client/account/account.component';
 import {AuthAdGuard} from './Dang_nhap/guardAd/auth.guard';
+import { ListStaffComponent } from './Admin/list-staff/list-staff.component';
+import { AdLoginComponent } from './admin/ad-login/ad-login.component';
+import { EditDeptComponent } from './Admin/edit-dept/edit-dept.component';
+import { EditStaffComponent } from './Admin/edit-staff/edit-staff.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +30,11 @@ import {AuthAdGuard} from './Dang_nhap/guardAd/auth.guard';
     AddDepartmentComponent,
     LoginComponent,
     StaffInfoComponent,
-    AccountComponent
+    AccountComponent,
+    ListStaffComponent,
+    AdLoginComponent,
+    EditDeptComponent,
+    EditStaffComponent
   ],
   imports: [
     BrowserModule,
@@ -35,11 +43,15 @@ import {AuthAdGuard} from './Dang_nhap/guardAd/auth.guard';
     FormsModule,
     RouterModule.forRoot([
       { path:'', component:HomeComponent ,canActivate:[AuthGuard]},
-      { path: 'addStaff', component:AddStaffComponent},
-      { path: 'addDept', component:AddDepartmentComponent},
+      { path: 'addStaff', component:AddStaffComponent,canActivate:[AuthAdGuard]},
+      { path: 'addDept', component:AddDepartmentComponent,canActivate:[AuthAdGuard]},
       { path:'login', component:LoginComponent},
       { path: 'admin', component: DashboardComponent,canActivate:[AuthAdGuard]},
       { path: 'staffInfo', component:StaffInfoComponent },
+      { path: 'reset-acc',component:AdLoginComponent},
+      { path: 'edit-staff',component:EditStaffComponent},
+      { path: 'edit-dept',component:EditDeptComponent},
+      { path: 'reset-pass',component:AccountComponent},
       { path: '**', redirectTo: '' },
 
     ])

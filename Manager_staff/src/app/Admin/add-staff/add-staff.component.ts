@@ -16,9 +16,10 @@ export class AddStaffComponent implements OnInit {
   //@Input() staff:staff;
   staffs=[];
   depts:dept[];
-
+  reset;
   AddForm:FormGroup;
   submitted=false;
+  conFirm :boolean;
   constructor(
     private formBuilder:FormBuilder,
     private service:AdminService,
@@ -26,18 +27,32 @@ export class AddStaffComponent implements OnInit {
   ) {}
   ngOnInit() {
     this.getDept();
-//full_name, password,email, address,gender,birthday,grade,id_department
     this.AddForm=this.formBuilder.group({
       full_name:['',Validators.required],
       password:['',Validators.required],
       email:['',[Validators.required,Validators.email]],
       address:['',Validators.required],
-      gender:['Male'],
+      gender:['Female'],
       birthday:['',Validators.required],
-      grade:['Nhân viên',Validators.required],
+      grade:['Staff',Validators.required],
       id_department:['',Validators.required],
     }
     );
+    this.reset = function(){
+    this.getDept();
+    this.AddForm=this.formBuilder.group({
+      full_name:['',Validators.required],
+      password:['',Validators.required],
+      email:['',[Validators.required,Validators.email]],
+      address:['',Validators.required],
+      gender:['Female'],
+      birthday:['',Validators.required],
+      grade:['Staff',Validators.required],
+      id_department:['',Validators.required],
+    }
+    );
+
+    }
   }
   get f(){
       return this.AddForm.controls;
@@ -59,9 +74,43 @@ export class AddStaffComponent implements OnInit {
     if(this.AddForm.invalid){
       return;
     }
+    if(this.AddForm.value.grade=="Manager"){
+      console.log("manager");
+        this.service.findManager(this.AddForm.value.id_department).subscribe(
+          data =>{
+            if(data){
+            console.log(data);
+            this.service.updateManager(data.id).subscribe(
+              data => {
+                if(data&&data.msg=='successfully'){
+                  this.conFirm =confirm("Bộ phận này đã có quản lí. Bạn có muốn tiếp tục? ");
+                  if(this.conFirm){
+                  this.service.addStaff(this.AddForm.value).subscribe(user => this.staffs.push(user));
+                  
+                  console.log(this.AddForm.value);
+                  this.submitted=false;
+                  this.reset();
+                }
+              }
+              }
+            )
+          }
+        else{
+          this.service.addStaff(this.AddForm.value).subscribe(data => this.staffs.push(data));
+            this.submitted=false;
+            
+            this.reset();
+
+        }},
+        )
+        this.submitted = false;
+    }else{
     this.service.addStaff(this.AddForm.value).subscribe(data => this.staffs.push(data));
       console.log(this.AddForm.value);
       this.submitted=false;
-      this.AddForm.reset();
+      
+      this.reset();
+
+    }
   }
 }

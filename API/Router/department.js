@@ -35,17 +35,29 @@ router.post('/depts',function(req,res,next){
 });
 
 router.delete('/depts/:id',function(req,res,next){
-    Dept.deleteDept(req.params.id,function(err,count){
+    if(req.params.id){
+    Dept.deleteStaffOndept(req.params.id,function(err,count){
+        if(err){
+            res.json(err);
+        }
+        else{
+            Dept.deleteDept(req.params.id,function(err,count){
         if (err) {
             res.json(err);
         }else{
             res.json(count);
         }
     });
-});
+        }
+    })
+    
+}});
 
 router.put('/depts/:id',function(req,res,next){
+    console.log(req.body);
+    console.log(req.params.id);
     Dept.updateDept(req.params.id,req.body,function(err,rows){
+        console.log(rows)
         if(err){
             res.json(err);
         }else{

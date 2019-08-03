@@ -1,0 +1,32 @@
+.invalid-feedback {
+    color: red
+}
+
+#customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 90%;
+    margin: auto
+}
+
+#customers td,
+#customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#customers tr:hover {
+    background-color: #ddd;
+}
+
+#customer input[type=submit] {
+    overflow: auto
+}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #1abc9c;
+    color: white;
+}

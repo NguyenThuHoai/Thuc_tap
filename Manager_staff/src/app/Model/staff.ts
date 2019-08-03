@@ -7,4 +7,5 @@ export class staff{
     grade:string; 
     id_department:number;
     password:string;
+    select?: boolean;
 }

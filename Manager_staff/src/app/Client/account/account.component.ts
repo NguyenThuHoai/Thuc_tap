@@ -2,7 +2,9 @@ import { Component, OnInit,Input } from '@angular/core';
 import { first} from 'rxjs/operators';
 
 import {ClientService} from '../client.service';
+import {Router} from '@angular/router';
 import {staff} from '../../Model/staff';
+import {LoginService} from '../../Dang_nhap/login.service';
 
 @Component({
   selector: 'app-account',
@@ -11,37 +13,45 @@ import {staff} from '../../Model/staff';
 })
 export class AccountComponent implements OnInit {
   @Input() value;
+  user ;
   old_pass = '';
   new_pass ='';
-  constructor(private service: ClientService) { }
-  ngOnInit() {
-    
-    this.value;
-    return this.service.getStaff(this.value).subscribe(data =>{
-      this.user = data;
-    })
-  }
+  currentUser;
+  correct :boolean;
+  constructor(private service: ClientService,
+    private logout: LoginService,
+    private router: Router
+    ) {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
+   }
+  ngOnInit() {
+   
+  }
   onSubmit(){
-        this.service.accuracy(this.value,this.old_pass).pipe(first()).subscribe(
+    console.log(this.new_pass);
+        this.service.accuracy(this.currentUser.email,this.old_pass).pipe(first()).subscribe(
             data => {
-                this.service.resetPass(this.new_pass).subscribe(
-                    data =>{
-                        alert("Đổi mật khẩu thành công!");
-                    },
-                    error =>{
-                        alert("Error");
-                    }
-                )
+              console.log(data);
+              
+              this.service.resetPass(data.id,this.new_pass).subscribe(
+                data =>{
+                    alert("Đổi mật khẩu thành công!");
+                    this.logout.logoutSt();
+                    this.router.navigate(['/login']);
+                    this.old_pass= '';
+                    this.new_pass = '';
+                },
+                error =>{
+                    alert("Error");
+                }
+              )
             },
             error =>{
                 alert ("Tài khoản chưa đúng!");
             }
-            
-        )
-        this.old_pass ='';
-        this.new_pass='';
-      
+        );
+          
   }
 
 

@@ -10,8 +10,13 @@ export class AuthAdGuard implements CanActivate {
       console.log(localStorage.getItem('admin'));
       
       if (localStorage.getItem('admin')) {
-          // logged in so return true
+        if(JSON.parse(localStorage.getItem('admin')).flag){
           return true;
+      }
+      else{
+          this.router.navigate(['/reset-acc'], { queryParams: {returnUrl:state.url}});
+          return false;
+      }
       }
       // not logged in so redirect to login page with the return url
       this.router.navigate(['/login'], { queryParams: {returnAdUrl:state.url}});

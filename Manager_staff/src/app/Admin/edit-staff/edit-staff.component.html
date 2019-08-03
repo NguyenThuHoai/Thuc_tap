@@ -1,0 +1,67 @@
+<div>
+    <div style="text-align: center;font-size: 20px"><br/><b>Sửa thông tin nhân viên</b></div>
+    <br/>
+    <form [formGroup]="EditForm" (ngSubmit)="onSubmit()">
+        <table id="customers">
+            <tr>
+                <td>Họ tên</td>
+                <td>Giới tính</td>
+                <td>Địa chỉ</td>
+                <td>Email</td>
+                <td>Ngày sinh</td>
+                <td>Chức vụ</td>
+                <td>Bộ phận</td>
+            </tr>
+            <tr>
+                <td><input type="text" formControlName="full_name" name="full_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.full_name.errors }">
+                    <div *ngIf="submitted && f.full_name.errors" class="invalid-feedback">
+                        <div *ngIf="f.full_name.errors.required">Username is required</div>
+                    </div>
+
+                </td>
+                <td><input type="radio" value="Male" formControlName="gender" name="gender" checked>Nam <br/>
+                    <input type="radio" checked value="Female" formControlName="gender" name="gender">Nữ<br/>
+
+                </td>
+                <td><input type="text" formControlName="address" name="address" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address.errors }">
+                    <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                        <div *ngIf="f.address.errors.required">Address is required</div>
+                    </div>
+
+                </td>
+                <td>
+                    <input type="text" class="form-control" formControlName="email" name="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">Email is required</div>
+                        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                    </div>
+                </td>
+                <td>
+                    <input type="date" formControlName="birthday" name="birthday" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.birthday.errors }">
+                    <div *ngIf="submitted && f.birthday.errors" class="invalid-feedback">
+                        <div *ngIf="f.birthday.errors.required">Birthday is required</div>
+                    </div>
+                </td>
+                <td>
+                    <select formControlName="grade">
+                                <option value="Manager">Trưởng phòng</option>
+                                <option value = "Staff">Nhân viên</option>
+                            </select>
+                    <div *ngIf="submitted && f.grade.errors" class="invalid-feedback">
+                        <div *ngIf="f.grade.errors.required">Grade is required</div>
+                    </div>
+                </td>
+                <td>
+                    <select formControlName="id_department">
+                                <option *ngFor="let dept of depts"  [value]="dept.id_department">{{dept.department_name}}</option>
+                            </select>
+                    <div *ngIf="submitted && f.id_department.errors" class="invalid-feedback">
+                        <div *ngIf="f.id_department.errors.required">Department is required</div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <input style="margin: 20px 80px;padding: 8px 15px;background-color: teal;color: white" type="submit" value="save">
+    </form>
+
+</div>

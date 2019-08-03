@@ -16,8 +16,10 @@ var admins = {
     deleteAdmin:function(id,callback){
     	return db.query("delete from manager_staff.`root_account` where id=?",[id],callback);
     },
-    updateAdmin:function(id,admin,callback){
-    	return db.query("update manager_staff.`root_account` set user_name=?, password=?",[admin.user_name,admin.password],[id],callback);
+    updateAdmin:function(username,password,callback){
+    	return db.query("UPDATE `root_account` SET `user_name` =?, `password` = ?,flag=1 where id=1",[username,password],callback);
     }
 };
-module.exports=admins;
+module.exports=admins; 
+
+

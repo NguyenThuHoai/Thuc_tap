@@ -69,7 +69,8 @@ export class LoginComponent implements OnInit {
     this.loading=true;
     this.loginService.adminLogin(this.f.userName.value,this.f.password.value).pipe(first()).subscribe(
         data =>{
-          console.log("đăng nhập")
+          console.log(this.loginService.currentUser);
+          
           this.router.navigate(['/admin']);    
         },
         error =>{
