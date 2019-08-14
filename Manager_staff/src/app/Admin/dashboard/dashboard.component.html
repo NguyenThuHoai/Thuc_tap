@@ -16,6 +16,8 @@
         <div *ngIf="chooseStaff">
             <h3>Danh sách tài khoản</h3>
             <div class="button"><a style="color: white;text-decoration: none" [routerLink]="['/addStaff']">Thêm tài khoản</a></div>
+            <div class="button"><a style="color: white;text-decoration: none;cursor: pointer;" (click)="export()">Export</a></div>
+
             <table class="nhanvien">
                 <tr>
                     <th>ID</th>

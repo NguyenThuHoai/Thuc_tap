@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { staff } from '../../Model/staff';
 import { dept } from '../../Model/dept';
 import { AdminService } from '../../Admin/Admin.service';
+import { ExportService } from '../Export_file/export.service';
 
 @Component({
 	selector: 'app-root-account',
@@ -25,12 +26,13 @@ export class DashboardComponent implements OnInit {
 	reset;
 	accoountReset = [];
 	item = [];
-	p:Number = 1;
-	count:Number = 5;
-	
+	p: Number = 1;
+	count: Number = 5;
+
 	constructor(
 		private dashboardrouter: Router,
 		private dashboardservice: AdminService,
+		private exportFile: ExportService
 	) {
 		this.admin = JSON.parse(localStorage.getItem('admin'));
 	}
@@ -38,7 +40,8 @@ export class DashboardComponent implements OnInit {
 	ngOnInit() {
 		this.getStaff();
 		this.getDept();
-		this.reset = function(){
+
+		this.reset = function () {
 			this.dashboardservice.listStaff().subscribe(data => this.staffs = data,
 				error => console.log(error),
 			);
@@ -153,5 +156,8 @@ export class DashboardComponent implements OnInit {
 				alert("successfully");
 			}
 		)
+	}
+	export(){
+		this.exportFile.exportExcel(this.staffs,'Staffs');
 	}
 }

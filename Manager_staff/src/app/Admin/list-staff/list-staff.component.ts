@@ -26,7 +26,6 @@ export class ListStaffComponent implements OnInit {
 		this.service.listStaffInDept(this.value).subscribe(
 			data => {
 				this.Staffs = data;
-				console.log(this.Staffs);
 			}
 		)
 	}
