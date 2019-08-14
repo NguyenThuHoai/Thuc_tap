@@ -13,7 +13,7 @@
                 <td>Bộ phận</td>
             </tr>
             <tr>
-                <td><input type="text" formControlName="full_name" name="full_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.full_name.errors }">
+                <td><input type="text" formControlName="full_name" name="full_name" class="form-control">
                     <div *ngIf="submitted && f.full_name.errors" class="invalid-feedback">
                         <div *ngIf="f.full_name.errors.required">Username is required</div>
                     </div>

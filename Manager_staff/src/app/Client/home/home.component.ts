@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ClientService} from '../client.service';
-import { Router} from '@angular/router';
+//import { ClientService } from '../client.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
    chooseInfo = false;
    chooseAccount = false;
    constructor(
-      private service: ClientService,
+      //private service: ClientService,
       private router: Router) {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }

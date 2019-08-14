@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Input} from '@angular/core';
 import {FormBuilder,FormGroup, Validators} from '@angular/forms';
 
-import {ClientService} from '../client.service';
+import { ClientService } from '../client.service';
 import {staff} from '../../Model/staff';
 
 @Component({

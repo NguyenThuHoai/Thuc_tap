@@ -5,7 +5,7 @@
             <span>|<button (click)="logout()" class="logout">Thoát</button> </span>
         </p>
         <ul>
-            <li><a style="cursor: pointer" (click)="list_staff()">Tài khoản</a></li>
+            <li><a style="cursor: pointer" (click)="list_staff()">Nhân viên</a></li>
             <li><a style="cursor: pointer" (click)="list_department()">Bộ phận</a></li>
             <li><a style="cursor: pointer" (click)="list_acc()">Tài khoản</a></li>
             <li></li>
@@ -28,8 +28,8 @@
                     <th>Bộ phận</th>
                     <th colspan="2">Xử lí</th>
                 </tr>
-                <tr *ngFor="let staff of staffs,index as id">
-                    <td>{{id}}</td>
+                <tr *ngFor="let staff of staffs | paginate:{ itemsPerPage: count, currentPage: p}">
+                    <td>1</td>
                     <td>{{staff.full_name}}</td>
                     <td *ngIf="staff.gender=='Male'">Nam</td>
                     <td *ngIf="staff.gender=='Female'">Nữ</td>
@@ -43,6 +43,9 @@
                     <td><button (click)="delStaff(staff.id)">Xóa</button></td>
                 </tr>
             </table>
+            <div>
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div>
             <app-edit-staff *ngIf="chooseEdit" [idstaff]="id_staff"></app-edit-staff>
         </div>
 
@@ -66,7 +69,7 @@
                     <td><button (click)="delDept(dept.id_department)">Xóa</button></td>
                 </tr>
             </table>
-            <app-edit-dept *ngIf="chooseEdit" [id]="id_dept"></app-edit-dept>
+            <app-edit-dept *ngIf="flag" [id]="id_dept"></app-edit-dept>
         </div>
 
         <div *ngIf="listStaff">

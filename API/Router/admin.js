@@ -36,6 +36,7 @@ jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 jwtOptions.secretOrKey = 'admin';
 
 router.post('/admins/login', function(req, res, next) {
+  if(req.body){
   let username = req.body.user_name;
   let passwrd = req.body.password;
   if (username && passwrd) {
@@ -53,7 +54,7 @@ router.post('/admins/login', function(req, res, next) {
     }
     })
   }
-});
+}});
 
  var resetPass = function(email,callback){
    return Staff.updateAccountbyAdmin(email,'12345678',callback);

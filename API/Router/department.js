@@ -24,6 +24,7 @@ router.get('/depts/:id?',function(req,res,next){
 });
 
 router.post('/depts',function(req,res,next){
+    if(req.body){
     console.log(req.body);
     Dept.addDept(req.body,function(err,rows){
         if(err){
@@ -32,7 +33,7 @@ router.post('/depts',function(req,res,next){
             res.json(res.body);
         }
     })
-});
+}});
 
 router.delete('/depts/:id',function(req,res,next){
     if(req.params.id){
@@ -54,6 +55,7 @@ router.delete('/depts/:id',function(req,res,next){
 }});
 
 router.put('/depts/:id',function(req,res,next){
+    if(req.body){
     console.log(req.body);
     console.log(req.params.id);
     Dept.updateDept(req.params.id,req.body,function(err,rows){
@@ -64,6 +66,6 @@ router.put('/depts/:id',function(req,res,next){
             res.json(rows);
         }
     });
-});
+}});
 
 module.exports=router;

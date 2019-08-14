@@ -22,7 +22,6 @@
             <td>{{staff.birthday|date:'dd/MM/y'}}</td>
             <td *ngIf="staff.grade=='Manager'">Trưởng phòng</td>
             <td *ngIf="staff.grade=='Staff'">Nhân viên</td>
-            <td><button (click)="editStaff()">Sửa</button></td>
             <td><button (click)="delStaff(staff.id)">Xóa</button></td>
         </tr>
     </table>

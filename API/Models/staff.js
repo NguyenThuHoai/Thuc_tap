@@ -18,7 +18,7 @@ var staffs = {
     },
     updateStaff: function(id, staff, callback){
         return db.query("update staff set full_name=?,email=?,address=?,gender=?,birthday=?,grade=?,id_department=? where id =?", 
-            [staff.fullName, staff.email, staff.address, staff.gender,staff.birthday,staff.grade,staff.id_department, id], callback);
+            [staff.full_name, staff.email, staff.address, staff.gender,staff.birthday,staff.grade,staff.id_department, id], callback);
     },
     updateAccount:function(id,password, callback){
        return db.query("update staff set password=?, flag=1 where id=?",[password,id],callback);
