@@ -25,9 +25,12 @@ export class DashboardComponent implements OnInit {
 	reset;
 	accoountReset = [];
 	item = [];
+	p:Number = 1;
+	count:Number = 5;
+	
 	constructor(
 		private dashboardrouter: Router,
-		private dashbordservice: AdminService,
+		private dashboardservice: AdminService,
 	) {
 		this.admin = JSON.parse(localStorage.getItem('admin'));
 	}
@@ -35,14 +38,13 @@ export class DashboardComponent implements OnInit {
 	ngOnInit() {
 		this.getStaff();
 		this.getDept();
-		this.reset = function () {
-			this.dashbordservice.listStaff().subscribe(data => this.staffs = data,
+		this.reset = function(){
+			this.dashboardservice.listStaff().subscribe(data => this.staffs = data,
 				error => console.log(error),
 			);
-			this.dashbordservice.listDept().subscribe(data => this.depts = data,
+			this.dashboardservice.listDept().subscribe(data => this.depts = data,
 				error => console.log(error),
 			);
-
 		}
 	}
 
@@ -64,13 +66,13 @@ export class DashboardComponent implements OnInit {
 		this.chooseAcc = false
 	}
 	getStaff() {
-		return this.dashbordservice.listStaff().subscribe(data => this.staffs = data,
+		return this.dashboardservice.listStaff().subscribe(data => this.staffs = data,
 			error => console.log(error),
 		);
 	}
 
 	getDept() {
-		return this.dashbordservice.listDept().subscribe(data => this.depts = data,
+		return this.dashboardservice.listDept().subscribe(data => this.depts = data,
 			error => console.log(error),
 		);
 	}
@@ -79,7 +81,7 @@ export class DashboardComponent implements OnInit {
 		console.log(id);
 		this.conFirm = confirm("Are you delete department?");
 		if (this.conFirm) {
-			this.dashbordservice.delDept(id).subscribe(
+			this.dashboardservice.delDept(id).subscribe(
 				data => {
 					this.reset();
 				}
@@ -91,7 +93,7 @@ export class DashboardComponent implements OnInit {
 	delStaff(id) {
 		this.conFirm = confirm("Are you delete staff?");
 		if (this.conFirm) {
-			this.dashbordservice.delStaff(id).subscribe(data => {
+			this.dashboardservice.delStaff(id).subscribe(data => {
 				this.reset();
 			});
 		};
@@ -122,7 +124,7 @@ export class DashboardComponent implements OnInit {
 		this.chooseStaff = false;
 		this.listStaff = false;
 		this.chooseAcc = true;
-		return this.dashbordservice.listStaff().subscribe(data => this.accounts = data,
+		return this.dashboardservice.listStaff().subscribe(data => this.accounts = data,
 			error => console.log(error),
 		);
 	}
@@ -146,13 +148,10 @@ export class DashboardComponent implements OnInit {
 		let data = (Object.assign({}, this.accoountReset));
 		console.log(data);
 
-		this.dashbordservice.resetAcc(this.accoountReset).subscribe(
+		this.dashboardservice.resetAcc(this.accoountReset).subscribe(
 			data => {
 				alert("successfully");
 			}
 		)
 	}
-	p:Number = 1;
-	count:Number = 1;
-	id: Number = 1;
 }

@@ -18,7 +18,7 @@
             <div class="button"><a style="color: white;text-decoration: none" [routerLink]="['/addStaff']">Thêm tài khoản</a></div>
             <table class="nhanvien">
                 <tr>
-                    <th>STT</th>
+                    <th>ID</th>
                     <th>Họ tên</th>
                     <th>Giới tính</th>
                     <th>Địa chỉ</th>
@@ -28,8 +28,8 @@
                     <th>Bộ phận</th>
                     <th colspan="2">Xử lí</th>
                 </tr>
-                <tr *ngFor="let staff of staffs | paginate:{ itemsPerPage: count, currentPage: p}">
-                    <td>1</td>
+                <tr *ngFor="let staff of staffs | paginate:{ itemsPerPage: count, currentPage: p,totalItems: staffs.length}">
+                    <td>{{staff.id}}</td>
                     <td>{{staff.full_name}}</td>
                     <td *ngIf="staff.gender=='Male'">Nam</td>
                     <td *ngIf="staff.gender=='Female'">Nữ</td>
@@ -80,18 +80,21 @@
             <form>
                 <table class="nhanvien" style="width:70%;margin:auto">
                     <tr>
-                        <td>STT</td>
+                        <td>ID</td>
                         <td>Tài khoản</td>
                         <td>chọn</td>
                     </tr>
-                    <tr *ngFor="let acc of staffs; index as id">
-                        <td>{{id}}</td>
+                    <tr *ngFor="let acc of staffs| paginate:{ itemsPerPage: 15, currentPage: p,totalItems: staffs.length}">
+                        <td>{{acc.id}}</td>
                         <td>{{acc.email}}</td>
                         <td>
                             <input type="checkbox" [(ngModel)]="acc.select" (change)="choose(acc.email,acc.select)" [ngModelOptions]="{standalone: true}" value="false">
                         </td>
                     </tr>
                 </table>
+                <div style="margin-right: 140px;float: right;">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
                 <input style=" margin-left: 200px;font-size:15px;margin-top: 30px;padding: 10px 15px;background-color: darkcyan;color: white" type="submit" value="Reset" (click)="resetPass()">
             </form>
         </div>

@@ -18,7 +18,7 @@ export class StaffInfoComponent implements OnInit {
   id: number;
   resetForm;
   userInfo={
-    fullName:'', 
+    full_name:'', 
     email:'',
     address:'',
     gender:'',
@@ -67,7 +67,7 @@ export class StaffInfoComponent implements OnInit {
     if(this.editForm.invalid){
       return;
     }
-    this.userInfo.fullName = this.editForm.value.full_name;
+    this.userInfo.full_name = this.editForm.value.full_name;
     this.userInfo.email = this.user.email;
     this.userInfo.address = this.editForm.value.address;
     this.userInfo.gender = this.editForm.value.gender;
