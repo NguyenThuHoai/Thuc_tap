@@ -109,7 +109,6 @@ export class DashboardComponent implements OnInit {
 	editStaff(id) {
 		this.chooseEdit = true;
 		this.id_staff = id;
-		console.log(id);
 	}
 
 	editDept(id) {
@@ -134,8 +133,8 @@ export class DashboardComponent implements OnInit {
 
 	exit: boolean;
 	choose(email, choose) {
-		console.log(email);
-		console.log(choose);
+		//console.log(email);
+		//console.log(choose);
 		if (choose == true) {
 			this.accoountReset.push(email);
 		}
@@ -147,15 +146,15 @@ export class DashboardComponent implements OnInit {
 		}
 	}
 	resetPass() {
-		console.log(this.accoountReset);
+		//console.log(this.accoountReset);
 		let data = (Object.assign({}, this.accoountReset));
-		console.log(data);
-
+		//console.log(data);
 		this.dashboardservice.resetAcc(this.accoountReset).subscribe(
 			data => {
 				alert("successfully");
 			}
 		)
+		//this.
 	}
 	export(){
 		this.exportFile.exportExcel(this.staffs,'Staffs');

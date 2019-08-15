@@ -37,7 +37,7 @@
                     </div>
                 </td>
                 <td>
-                    <input type="date" formControlName="birthday" name="birthday" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.birthday.errors }">
+                    <input type="date" formControlName="birthday" data-date-format="dd-MM-yyy" name="birthday" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.birthday.errors }">
                     <div *ngIf="submitted && f.birthday.errors" class="invalid-feedback">
                         <div *ngIf="f.birthday.errors.required">Birthday is required</div>
                     </div>
