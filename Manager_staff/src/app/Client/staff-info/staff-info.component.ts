@@ -56,7 +56,9 @@ export class StaffInfoComponent implements OnInit {
 					this.MM = this.month.toString();
 				}
 				this.yyyy = this.year.toString();
-				this.user.birthday = this.yyyy +'-'+this.MM+'-'+this.dd;				
+				this.user.birthday = this.yyyy +'-'+this.MM+'-'+this.dd;
+				console.log(this.user.birthday);
+								
 				if (this.user.grade == "Manager") {
 				this.service.listStaffonDepts(this.user.id_department).subscribe(
 					data => {
@@ -101,6 +103,26 @@ export class StaffInfoComponent implements OnInit {
 					this.resetForm = function resetForm() {
 						this.service.getStaff(this.value).subscribe(data => {
 							this.user = data;
+							this.user.birthday = new Date(data.birthday);
+							console.log(this.user.birthday);
+							this.day = this.user.birthday.getDate();
+							this.month = this.user.birthday.getMonth()+1;
+				this.year = this.user.birthday.getFullYear();
+				if(this.day <= 9){
+					this.dd = '0'+ this.day.toString();
+				}
+				if(this.day >9){
+					this.dd = this.day.toString();
+				}
+				if(this.month <=9){
+					this.MM = '0'+this.month.toString();
+				}
+				if(this.month >9){
+					this.MM = this.month.toString();
+				}
+				this.yyyy = this.year.toString();
+				this.user.birthday = this.yyyy +'-'+this.MM+'-'+this.dd;
+				console.log(this.user.birthday);
 							this.editForm = this.formBuilder.group({
 								full_name: [this.user.full_name, Validators.required],
 								gender: [this.user.gender, Validators.required],
